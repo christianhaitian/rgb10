@@ -1,2 +1,2 @@
 #!/bin/bash
-msgbox="No updates available at this time.  Check back later."
+sudo msgbox="No updates available at this time.  Check back later."
