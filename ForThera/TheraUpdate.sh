@@ -1,3 +1,3 @@
 #!/bin/bash
 updatemessage="No updates available at this time.  Check back later."
-exit 187
+exit 113
