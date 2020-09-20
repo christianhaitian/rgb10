@@ -44,4 +44,6 @@ fi
 
 touch /home/odroid/.config/update09192020
 msgbox "Updates have been completed."
+rm -- "$0"
 exit 187
+done
