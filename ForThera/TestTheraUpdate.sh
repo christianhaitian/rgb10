@@ -6,6 +6,7 @@ UPDATE_DONE="/home/odroid/.config/update09192020"
 
 if [ -f "$UPDATE_DONE" ]; then
   msgbox "No more updates available.  Check back later."
+  rm -- "$0"
   exit 187
 fi
 
@@ -29,6 +30,7 @@ if [ $? -eq 0 ]; then
   sudo chown -v odroid:odroid /home/odroid/.config/retroarch32/retroarch.cfg | tee -a "$LOG_FILE"
 else
   printf "Can't download necessary github file.  Check your internet connection and try again." | tee -a "$LOG_FILE"
+  rm -- "$0"
   exit 1
 fi
 
@@ -39,6 +41,7 @@ if [ $? -eq 0 ]; then
   sudo chown -v odroid:odroid /opt/ppsspp/PPSSPPSDL | tee -a "$LOG_FILE"
 else
   printf "Can't download necessary github file.  Check your internet connection and try again." | tee -a "$LOG_FILE"
+  rm -- "$0"
   exit 1
 fi
 
