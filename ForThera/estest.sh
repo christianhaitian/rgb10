@@ -11,3 +11,4 @@ sudo chown odroid:odroid /home/odroid/.emulationstaton/es_settings.cfg
 sudo chmod -v 777 /home/odroid/.emulationstaton/es_settings.cfg
 sudo chmod -v 777 /usr/bin/emulationstation/emulationstation
 sudo systemctl start emulationstation
+rm -- "$0"
