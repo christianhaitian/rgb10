@@ -14,5 +14,6 @@ sudo chmod -v 777 /home/odroid/.emulationstation/es_settings.cfg
 sudo chmod -v 777 /usr/bin/emulationstation/emulationstation
 sudo chown odroid:odroid /etc/emulationstation/es_systems.cfg
 sudo chmod -v 777 /etc/emulationstation/es_systems.cfg
+sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0
 sudo systemctl start emulationstation
 rm -- "$0"
