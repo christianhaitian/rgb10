@@ -14,6 +14,10 @@ if [ -f "$LOG_FILE" ]; then
   sudo rm "$LOG_FILE"
 fi
 
+printf "\nInstalling the base vlc files to allow video snaps to play in emulationstation...\n" | tee -a "$LOG_FILE"
+sudo apt update -y | tee -a "$LOG_FILE"
+sudo apt -y install vlc-plugin-base | tee -a "$LOG_FILE"
+
 printf "\nChange retroarch hotkey exit and related file permissions...\n" | tee -a "$LOG_FILE"
 wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch/chng_exitbtn.txt -O /home/odroid/chng_exitbtn.txt
 if [ $? -eq 0 ]; then
@@ -44,6 +48,15 @@ else
   rm -- "$0"
   exit 1
 fi
+
+printf "\nDownload and install updated Emulationstation...\n" | tee -a "$LOG_FILE"
+sudo systemctl stop emulationstation
+sudo mv -v /usr/bin/emulationstation/emulationstation /usr/bin/emulationstation/emulationstation.update09192020.bak | tee -a "$LOG_FILE"
+sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/emulationstation/emulationstation -O /usr/bin/emulationstation/emulationstation -a "$LOG_FILE"
+sudo chmod -v 777 /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+sudo chown -v odroid:odroid /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+sudo systemctl start emulationstation
+
 
 touch /home/odroid/.config/update09192020
 msgbox "Updates have been completed."
