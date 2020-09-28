@@ -16,6 +16,21 @@ sudo chown odroid:odroid /etc/emulationstation/es_systems.cfg
 sudo chmod -v 777 /etc/emulationstation/es_systems.cfg
 sudo mkdir /roms/x68000
 sudo mkdir /roms/neogeocd
+sudo wget http://eple.us/retroroller/libretro/aarch64/neocd_libretro.so.zip
+sudo wget http://eple.us/retroroller/libretro/aarch64/duckstation_libretro.so.zip
+sudo wget http://eple.us/retroroller/libretro/aarch64/px68k_libretro.so.zip
+sudo unzip -n neocd_libretro.so.zip -d /home/odroid/.config/retroarch/cores/
+sudo unzip -n duckstation_libretro.so.zip -d /home/odroid/.config/retroarch/cores/
+sudo unzip -n px68k_libretro.so.zip -d /home/odroid/.config/retroarch/cores/
+sudo chmod -v 777 /home/odroid/.config/retroarch/cores/neocd_libretro.so
+sudo chown odroid:odroid /home/odroid/.config/retroarch/cores/neocd_libretro.so
+sudo chmod -v 777 /home/odroid/.config/retroarch/cores/duckstation_libretro.so
+sudo chown odroid:odroid /home/odroid/.config/retroarch/cores/duckstation_libretro.so
+sudo chmod -v 777 /home/odroid/.config/retroarch/cores/px68k_libretro.so
+sudo chown odroid:odroid /home/odroid/.config/retroarch/cores/px68k_libretro.so
+sudo rm neocd_libretro.so.zip
+sudo rm duckstation.so.zip
+sudo rm px68k_libretro.so.zip
 sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0
 sudo systemctl start emulationstation
 rm -- "$0"
