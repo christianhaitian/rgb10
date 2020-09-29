@@ -84,6 +84,41 @@ sudo rm -v px68k_libretro.so.zip | tee -a "$LOG_FILE"
 sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
 sudo systemctl start emulationstation
 
+LOGODIR="/boot/BMPs/"
+
+if [ -d "$LOGODIR" ]; then
+  printf "\nDownloading and copying logos to /boot/BMPs folder if they don't exist already...\n" | tee -a "$LOG_FILE"
+  sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/BMPs/logo1.bmp -O /boot/BMPs/logo1.bmp -a "$LOG_FILE"
+  sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/BMPs/logo2.bmp -O /boot/BMPs/logo2.bmp -a "$LOG_FILE"
+  sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/BMPs/logo3.bmp -O /boot/BMPs/logo3.bmp -a "$LOG_FILE"
+  sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/BMPs/logo4.bmp -O /boot/BMPs/logo4.bmp -a "$LOG_FILE"
+else
+  printf "\nCreating logo directory in boot folder...\n" | tee -a "$LOG_FILE"
+  sudo mkdir /boot/BMPs | tee -a "$LOG_FILE"
+  printf "\nDownloading and copying logos to /boot/BMPs folder...\n" | tee -a "$LOG_FILE"
+  sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/BMPs/logo1.bmp -O /boot/BMPs/logo1.bmp -a "$LOG_FILE"
+  sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/BMPs/logo2.bmp -O /boot/BMPs/logo2.bmp -a "$LOG_FILE"
+  sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/BMPs/logo3.bmp -O /boot/BMPs/logo3.bmp -a "$LOG_FILE"
+  sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/BMPs/logo4.bmp -O /boot/BMPs/logo4.bmp -a "$LOG_FILE"
+  wget -nc https://github.com/christianhaitian/rgb10/raw/master/ForThera/imageshift.sh -P /home/odroid/.config -a "$LOG_FILE"
+  sudo chown -v odroid:odroid /home/odroid/.config/imageshift.sh
+fi
+
+IMAGESHIFTEXIST=$(sudo crontab -l | sed -n '/imageshift.sh/p')
+
+if [[ "$IMAGESHIFTEXIST" == *"imageshift.sh"* ]]; then
+  printf "\nimageshift script already exists, moving on...\n" | tee -a "$LOG_FILE"
+else
+  printf "\nDownloading and copying imageshift script to proper location and setting cron job at each boot...\n" | tee -a "$LOG_FILE"
+  wget -nc https://github.com/christianhaitian/rgb10/raw/master/ForThera/imageshift.sh -P /home/odroid/.config/  | tee -a "$LOG_FILE"
+  sudo chown odroid:odroid /home/odroid/.config/imageshift.sh
+  sudo chmod 777 /home/odroid/.config/imageshift.sh | tee -a "$LOG_FILE"
+  (sudo crontab -l 2>/dev/null; echo "@reboot /home/odroid/.config/imageshift.sh") | sudo crontab -  | tee -a "$LOG_FILE"
+  sudo service cron reload | tee -a "$LOG_FILE"
+fi
+
+
+
 
 touch /home/odroid/.config/update09192020
 msgbox "Updates have been completed."
