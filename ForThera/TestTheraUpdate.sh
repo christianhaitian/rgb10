@@ -61,7 +61,7 @@ sudo chmod -v 777 /home/odroid/.config/retroarch/retroarch-core-options.cfg | te
 sudo chmod -v 777 /home/odroid/.config/retroarch32/retroarch-core-options.cfg | tee -a "$LOG_FILE"
 
 printf "\nDownload and install updated Emulationstation and additional themes...\n" | tee -a "$LOG_FILE"
-sudo systemctl stop emulationstation
+#sudo systemctl stop emulationstation
 sudo apt-get install -y unzip libboost-system-dev libboost-filesystem-dev libboost-date-time-dev libboost-locale-dev libfreeimage-dev libfreetype6-dev libeigen3-dev libcurl4-openssl-dev libasound2-dev cmake libsdl2-dev libsdl2-mixer-2.0-0 | tee -a "$LOG_FILE"
 sudo mv -v /usr/bin/emulationstation/emulationstation /usr/bin/emulationstation/emulationstation.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
 sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/emulationstation-fcamod/emulationstation -O /usr/bin/emulationstation/emulationstation -a "$LOG_FILE"
@@ -102,7 +102,7 @@ sudo rm -v Freeplay9-30-v1.zip | tee -a "$LOG_FILE"
 sudo rm -v Switch9-29-20-v4.zip | tee -a "$LOG_FILE"
 sudo rm -v es-theme-theRA_NTFS-carbon.zip | tee -a "$LOG_FILE"
 sudo chown -v odroid:odroid -R /etc/emulationstation/ | tee -a "$LOG_FILE"
-sudo systemctl start emulationstation
+#sudo systemctl start emulationstation
 
 LOGODIR="/boot/BMPs/"
 
