@@ -90,7 +90,7 @@ sudo chown odroid:odroid /home/odroid/.config/retroarch/cores/duckstation_libret
 sudo chmod -v 777 /home/odroid/.config/retroarch/cores/px68k_libretro.so | tee -a "$LOG_FILE"
 sudo chown -v odroid:odroid /home/odroid/.config/retroarch/cores/px68k_libretro.so | tee -a "$LOG_FILE"
 sudo rm -v neocd_libretro.so.zip | tee -a "$LOG_FILE"
-sudo rm -v duckstation.so.zip | tee -a "$LOG_FILE"
+sudo rm -v duckstation_libretro.so.zip | tee -a "$LOG_FILE"
 sudo rm -v px68k_libretro.so.zip | tee -a "$LOG_FILE"
 wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/Freeplay9-30-v1.zip -a "$LOG_FILE"
 wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/Switch9-29-20-v4.zip -a "$LOG_FILE"
