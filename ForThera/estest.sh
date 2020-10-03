@@ -29,7 +29,7 @@ sudo chown odroid:odroid /home/odroid/.config/retroarch/cores/duckstation_libret
 sudo chmod -v 777 /home/odroid/.config/retroarch/cores/px68k_libretro.so
 sudo chown odroid:odroid /home/odroid/.config/retroarch/cores/px68k_libretro.so
 sudo rm neocd_libretro.so.zip
-sudo rm duckstation.so.zip
+sudo rm duckstation_libretro.so.zip
 sudo rm px68k_libretro.so.zip
 sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0
 sudo systemctl start emulationstation
