@@ -23,6 +23,7 @@ sudo wget http://eple.us/retroroller/libretro/aarch64/tgbdual_libretro.so.zip
 sudo unzip -n neocd_libretro.so.zip -d /home/odroid/.config/retroarch/cores/
 sudo unzip -n duckstation_libretro.so.zip -d /home/odroid/.config/retroarch/cores/
 sudo unzip -n px68k_libretro.so.zip -d /home/odroid/.config/retroarch/cores/
+sudo unzip -n tgbdual_libretro.so.zip -d /home/odroid/.config/retroarch/cores/
 sudo chmod -v 777 /home/odroid/.config/retroarch/cores/neocd_libretro.so
 sudo chown odroid:odroid /home/odroid/.config/retroarch/cores/neocd_libretro.so
 sudo chmod -v 777 /home/odroid/.config/retroarch/cores/duckstation_libretro.so
