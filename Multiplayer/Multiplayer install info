@@ -1,0 +1,12 @@
+- Copy gamestream_encoder_server, host-list, playertoo, retrorun32-mp, and retrorun-mp to /usr/bin folder and set file permissions for these to 777
+- Copy gamestream folder and contents to /usr/include and set folder and content file permissions to 777
+- Copy libgamestream_encoder.so to /usr/lib/aarch64-linux-gnu and set file permission to 777
+- Copy libenet.so.7.0.0 to /usr/lib/aarch64-linux-gnu and create symlink to libenet.so.7 `sudo ln -s /usr/lib/aarch64-linux-gnu/libenet.so.7.0.0 /usr/lib/aarch64-linux-gnu/libenet.so.7`
+- Copy librockchip_mpp.so.0 /usr/lib/aarch64-linux-gnu and create symlink to librockchip_mpp.so.1 `sudo ln -s /usr/lib/aarch64-linux-gnu/librockchip_mpp.so.0 /usr/lib/aarch64-linux-gnu/librockchip_mpp.so.1`
+  - Also create symlink to /usr/lib/aarch64-linux-gnu/librockchip_mpp.so `sudo ln -s /usr/lib/aarch64-linux-gnu/librockchip_mpp.so.0 /usr/lib/aarch64-linux-gnu/librockchip_mpp.so`
+- Install avahi-daemon `sudo apt -y update && sudo apt -y install avahi-daemon`
+- Set /dev/vpu_service to owner video and permission 660 `sudo chown video /dev/vpu_service && sudo chmod 660 /dev/vpu_service`
+- Copy gamestream.service to /etc/systemd/system/
+  - Then do `sudo systemctl daemon-reload`
+  - Then `sudo systemctl start gamestream.service`
+  - Finally `sudo systemctl enable example.service`

@@ -1,0 +1,11 @@
+Description=Gamestream Service
+
+[Service]
+Type=simple
+User=odroid
+WorkingDirectory=/home/odroid
+ExecStart=/usr/bin/gamestream_encoder_server
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
