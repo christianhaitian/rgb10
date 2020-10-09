@@ -163,6 +163,26 @@ else
   sudo service cron reload | tee -a "$LOG_FILE"
 fi
 
+printf "\nAdd support for Cannonball, Cavestory, Doom and Doom2...\n" | tee -a "$LOG_FILE"
+wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/ports.zip -a "$LOG_FILE"
+sudo wget http://eple.us/retroroller/libretro/aarch64/prboom_libretro.so.zip -a "$LOG_FILE"
+sudo wget http://eple.us/retroroller/libretro/aarch64/nxengine_libretro.so.zip -a "$LOG_FILE"
+sudo wget http://eple.us/retroroller/libretro/aarch64/cannonball_libretro.so.zip -a "$LOG_FILE"
+sudo unzip -o ports.zip -d /roms/ | tee -a "$LOG_FILE"
+sudo unzip -n prboom_libretro.so.zip -d /home/odroid/.config/retroarch/cores/ | tee -a "$LOG_FILE"
+sudo unzip -n nxengine_libretro.so.zip -d /home/odroid/.config/retroarch/cores/ | tee -a "$LOG_FILE"
+sudo unzip -n cannonball_libretro.so.zip -d /home/odroid/.config/retroarch/cores/ | tee -a "$LOG_FILE"
+sudo chmod -v 777 /home/odroid/.config/retroarch/cores/prboom_libretro.so | tee -a "$LOG_FILE"
+sudo chown -v odroid:odroid /home/odroid/.config/retroarch/cores/prboom_libretro.so | tee -a "$LOG_FILE"
+sudo chmod -v 777 /home/odroid/.config/retroarch/cores/nxengine_libretro.so | tee -a "$LOG_FILE"
+sudo chown odroid:odroid /home/odroid/.config/retroarch/cores/nxengine_libretro.so | tee -a "$LOG_FILE"
+sudo chmod -v 777 /home/odroid/.config/retroarch/cores/cannonball_libretro.so | tee -a "$LOG_FILE"
+sudo chown -v odroid:odroid /home/odroid/.config/retroarch/cores/cannonball_libretro.so | tee -a "$LOG_FILE"
+sudo rm -v prboom_libretro.so.zip | tee -a "$LOG_FILE"
+sudo rm -v nxengine_libretro.so.zip | tee -a "$LOG_FILE"
+sudo rm -v cannonball_libretro.so.zip | tee -a "$LOG_FILE"
+sudo rm -v ports.zip | tee -a "$LOG_FILE"
+
 printf "\nLast but not least, let's ensure that Drastic performance has not been negatively impacted by these updates...\n" | tee -a "$LOG_FILE"
 sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
 
