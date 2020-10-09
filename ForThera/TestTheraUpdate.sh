@@ -183,6 +183,9 @@ sudo rm -v nxengine_libretro.so.zip | tee -a "$LOG_FILE"
 sudo rm -v cannonball_libretro.so.zip | tee -a "$LOG_FILE"
 sudo rm -v ports.zip | tee -a "$LOG_FILE"
 
+printf "\nFix Quake shortcut option...\n" | tee -a "$LOG_FILE"
+sudo wget https://github.com/christianhaitian/rk2020/rgb10/master/ForThera/ports/Quake.sh -O /roms/ports/Quake.sh | tee -a "$LOG_FILE"
+
 printf "\nLast but not least, let's ensure that Drastic performance has not been negatively impacted by these updates...\n" | tee -a "$LOG_FILE"
 sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
 
