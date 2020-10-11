@@ -205,7 +205,8 @@ printf "\nLast but not least, let's ensure that Drastic performance has not been
 sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
 
 touch "$UPDATE_DONE"
-msgbox "Updates have been completed."
-rm -- "$0"
+msgbox "Updates have been completed.  System will now reboot so the kernel updates can take effect."
+rm -v -- "$0" | tee -a "$LOG_FILE"
+sudo reboot
 exit 187
 done
