@@ -56,6 +56,17 @@ else
   exit 1
 fi
 
+printf "\nUpdated Rertroarch 1.9.0 with RGA Scaling...\n" | tee -a "$LOG_FILE"
+mv -v /opt/retroarch/bin/retroarch /opt/retroarch/bin/retroarch.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
+mv -v /opt/retroarch/bin/retroarch32 /opt/retroarch/bin/retroarch32.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
+wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch/retroarch -O /opt/retroarch/bin/retroarch -a "$LOG_FILE"
+wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch32/retroarch32 -O /opt/retroarch/bin/retroarch32 -a "$LOG_FILE"
+sudo chown -v odroid:odroid /opt/retroarch/bin/retroarch
+sudo chmod -v 777 /opt/retroarch/bin/retroarch
+sudo chown -v odroid:odroid /opt/retroarch/bin/retroarch32
+sudo chmod -v 777 /opt/retroarch/bin/retroarch32
+sudo ln -sfv /usr/lib/aarch64-linux-gnu/librga.so /usr/lib/aarch64-linux-gnu/librga.so.2
+
 printf "\nFix analog stick not responding in N64 games and Mame2003 with no control ...\n" | tee -a "$LOG_FILE"
 mv -v /home/odroid/.config/retroarch/retroarch-core-options.cfg /home/odroid/.config/retroarch/retroarch-core-options.cfg.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
 mv -v /home/odroid/.config/retroarch32/retroarch-core-options.cfg /home/odroid/.config/retroarch32/retroarch-core-options.cfg.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
@@ -191,7 +202,7 @@ sudo rm -v cannonball_libretro.so.zip | tee -a "$LOG_FILE"
 sudo rm -v ports.zip | tee -a "$LOG_FILE"
 
 printf "\nFix Quake shortcut option...\n" | tee -a "$LOG_FILE"
-sudo wget https://github.com/christianhaitian/rgb10/master/ForThera/ports/Quake.sh -O /roms/ports/Quake.sh | tee -a "$LOG_FILE"
+sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/ports/Quake.sh -O /roms/ports/Quake.sh | tee -a "$LOG_FILE"
 
 printf "\nInstall updated kernel with wifi sleep fix...\n" | tee -a "$LOG_FILE"
 sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/BootFileUpdates.tar.gz -a "$LOG_FILE"
