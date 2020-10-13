@@ -25,8 +25,8 @@ wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch/chn
 if [ $? -eq 0 ]; then
   sed -e '/input_exit_emulator_btn/{r /home/odroid/chng_exitbtn.txt' -e 'd}' /home/odroid/.config/retroarch/retroarch.cfg > /home/odroid/retroarch64.cfg
   sed -e '/input_exit_emulator_btn/{r /home/odroid/chng_exitbtn.txt' -e 'd}' /home/odroid/.config/retroarch32/retroarch.cfg > /home/odroid/retroarch32.cfg
-  mv /home/odroid/.config/retroarch/retroarch.cfg /home/odroid/.config/retroarch/retroarch.update$UPDATE_DATE.bak
-  mv /home/odroid/.config/retroarch32/retroarch.cfg /home/odroid/.config/retroarch32/retroarch.update$UPDATE_DATE.bak
+  mv -v /home/odroid/.config/retroarch/retroarch.cfg /home/odroid/.config/retroarch/retroarch.update$UPDATE_DATE.bak
+  mv -v /home/odroid/.config/retroarch32/retroarch.cfg /home/odroid/.config/retroarch32/retroarch.update$UPDATE_DATE.bak
   mv -v /home/odroid/retroarch64.cfg /home/odroid/.config/retroarch/retroarch.cfg | tee -a "$LOG_FILE"
   mv -v /home/odroid/retroarch32.cfg /home/odroid/.config/retroarch32/retroarch.cfg | tee -a "$LOG_FILE"
   sed -e '/input_menu_toggle_gamepad_combo/{r /home/odroid/chng_gamepadbtn.txt' -e 'd}' /home/odroid/.config/retroarch/retroarch.cfg > /home/odroid/retroarch64.cfg
@@ -61,11 +61,17 @@ mv -v /opt/retroarch/bin/retroarch /opt/retroarch/bin/retroarch.update$UPDATE_DA
 mv -v /opt/retroarch/bin/retroarch32 /opt/retroarch/bin/retroarch32.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
 wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch/retroarch -O /opt/retroarch/bin/retroarch -a "$LOG_FILE"
 wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch32/retroarch32 -O /opt/retroarch/bin/retroarch32 -a "$LOG_FILE"
-sudo chown -v odroid:odroid /opt/retroarch/bin/retroarch
-sudo chmod -v 777 /opt/retroarch/bin/retroarch
-sudo chown -v odroid:odroid /opt/retroarch/bin/retroarch32
-sudo chmod -v 777 /opt/retroarch/bin/retroarch32
-sudo ln -sfv /usr/lib/aarch64-linux-gnu/librga.so /usr/lib/aarch64-linux-gnu/librga.so.2
+wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch/chng_viddrv.txt -O /home/odroid/chng_viddrv.txt -a "$LOG_FILE"
+sed -e '/video_driver/{r /home/odroid/chng_viddrv.txt' -e 'd}' /home/odroid/.config/retroarch/retroarch.cfg > /home/odroid/retroarch64.cfg
+mv -v /home/odroid/retroarch64.cfg /home/odroid/.config/retroarch/retroarch.cfg | tee -a "$LOG_FILE"
+sudo rm -v /home/odroid/chng_viddrv.txt | tee -a "$LOG_FILE"
+sudo chmod -v 777 /home/odroid/.config/retroarch/retroarch.cfg | tee -a "$LOG_FILE"
+sudo chown -v odroid:odroid /home/odroid/.config/retroarch/retroarch.cfg | tee -a "$LOG_FILE"
+sudo chown -v odroid:odroid /opt/retroarch/bin/retroarch | tee -a "$LOG_FILE"
+sudo chmod -v 777 /opt/retroarch/bin/retroarch | tee -a "$LOG_FILE"
+sudo chown -v odroid:odroid /opt/retroarch/bin/retroarch32 | tee -a "$LOG_FILE"
+sudo chmod -v 777 /opt/retroarch/bin/retroarch32 | tee -a "$LOG_FILE"
+sudo ln -sfv /usr/lib/aarch64-linux-gnu/librga.so /usr/lib/aarch64-linux-gnu/librga.so.2 | tee -a "$LOG_FILE"
 
 printf "\nFix analog stick not responding in N64 games and Mame2003 with no control ...\n" | tee -a "$LOG_FILE"
 mv -v /home/odroid/.config/retroarch/retroarch-core-options.cfg /home/odroid/.config/retroarch/retroarch-core-options.cfg.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
