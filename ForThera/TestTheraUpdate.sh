@@ -101,7 +101,7 @@ sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/emulatio
 sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/emulationstation-fcamod/.emulationstation/es_settings.cfg -O /home/odroid/.emulationstation/es_settings.cfg -a "$LOG_FILE"
 sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/emulationstation-fcamod/es_systems.cfg -O /etc/emulationstation/es_systems.cfg -a "$LOG_FILE"
 sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/emulationstation-fcamod/es-resources.tar -a "$LOG_FILE"
-sudo tar -xfv es-resources.tar -C /usr/bin/emulationstation/ | tee -a "$LOG_FILE"
+sudo tar -vxf es-resources.tar -C /usr/bin/emulationstation/ | tee -a "$LOG_FILE"
 sudo rm -v es-resources.tar | tee -a "$LOG_FILE"
 sudo chown -v odroid:odroid /home/odroid/.emulationstation/es_settings.cfg | tee -a "$LOG_FILE"
 sudo chmod -v 777 /home/odroid/.emulationstation/es_settings.cfg | tee -a "$LOG_FILE"
