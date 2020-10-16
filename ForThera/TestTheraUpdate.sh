@@ -22,8 +22,8 @@ sudo apt update -y | tee -a "$LOG_FILE"
 sudo apt -y install vlc-plugin-base | tee -a "$LOG_FILE"
 
 printf "\nChange retroarch hotkey exit and related file permissions...\n" | tee -a "$LOG_FILE"
-wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch/chng_exitbtn.txt -O /home/odroid/chng_exitbtn.txt
-wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch/chng_gamepadbtn.txt -O /home/odroid/chng_gamepadbtn.txt
+wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch/chng_exitbtn.txt -O /home/odroid/chng_exitbtn.txt -a "$LOG_FILE"
+wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch/chng_gamepadbtn.txt -O /home/odroid/chng_gamepadbtn.txt -a "$LOG_FILE"
 if [ $? -eq 0 ]; then
   sed -e '/input_exit_emulator_btn/{r /home/odroid/chng_exitbtn.txt' -e 'd}' /home/odroid/.config/retroarch/retroarch.cfg > /home/odroid/retroarch64.cfg
   sed -e '/input_exit_emulator_btn/{r /home/odroid/chng_exitbtn.txt' -e 'd}' /home/odroid/.config/retroarch32/retroarch.cfg > /home/odroid/retroarch32.cfg
@@ -48,7 +48,7 @@ else
 fi
 
 printf "\nChange PPSSPP for new exit combo and related file permissions...\n" | tee -a "$LOG_FILE"
-wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/ppsspp/PPSSPPSDL -O /opt/ppsspp/PPSSPPSDL
+wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/ppsspp/PPSSPPSDL -O /opt/ppsspp/PPSSPPSDL -a "$LOG_FILE"
 if [ $? -eq 0 ]; then
   sudo chmod -v 777 /opt/ppsspp/PPSSPPSDL | tee -a "$LOG_FILE"
   sudo chown -v odroid:odroid /opt/ppsspp/PPSSPPSDL | tee -a "$LOG_FILE"
@@ -83,7 +83,7 @@ wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch/ret
 wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch32/retroarch-core-options.cfg -O /home/odroid/.config/retroarch32/retroarch-core-options.cfg -a "$LOG_FILE"
 wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch32/retroarch.cfg -O /home/odroid/.config/retroarch32/retroarch.cfg -a "$LOG_FILE"
 sudo mkdir -v /home/odroid/.config/retroarch32/config/remaps/ | tee -a "$LOG_FILE"
-sudo chown -v odroid:odroid /home/odroid/.config/retroarch32/config/remaps/
+sudo chown -v odroid:odroid /home/odroid/.config/retroarch32/config/remaps/ | tee -a "LOG_FILE"
 wget -N https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch32/config/ParaLLEl%20N64/ParaLLEl%20N64.rmp -P "/home/odroid/.config/retroarch32/config/remaps/ParaLLEl N64" -a "$LOG_FILE"
 sudo chown -v odroid:odroid /home/odroid/.config/retroarch/retroarch-core-options.cfg | tee -a "$LOG_FILE"
 sudo chown -v odroid:odroid /home/odroid/.config/retroarch32/retroarch-core-options.cfg | tee -a "$LOG_FILE"
