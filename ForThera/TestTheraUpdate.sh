@@ -83,7 +83,7 @@ wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch/ret
 wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch32/retroarch-core-options.cfg -O /home/odroid/.config/retroarch32/retroarch-core-options.cfg -a "$LOG_FILE"
 wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch32/retroarch.cfg -O /home/odroid/.config/retroarch32/retroarch.cfg -a "$LOG_FILE"
 sudo mkdir -v /home/odroid/.config/retroarch32/config/remaps/ | tee -a "$LOG_FILE"
-sudo chown -v odroid:odroid /home/odroid/.config/retroarch32/config/remaps/ | tee -a "LOG_FILE"
+sudo chown -v odroid:odroid /home/odroid/.config/retroarch32/config/remaps/ | tee -a "$LOG_FILE"
 wget -N https://github.com/christianhaitian/rgb10/raw/master/ForThera/retroarch32/config/ParaLLEl%20N64/ParaLLEl%20N64.rmp -P "/home/odroid/.config/retroarch32/config/remaps/ParaLLEl N64" -a "$LOG_FILE"
 sudo chown -v odroid:odroid /home/odroid/.config/retroarch/retroarch-core-options.cfg | tee -a "$LOG_FILE"
 sudo chown -v odroid:odroid /home/odroid/.config/retroarch32/retroarch-core-options.cfg | tee -a "$LOG_FILE"
