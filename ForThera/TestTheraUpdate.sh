@@ -269,7 +269,7 @@ sudo chown -v odroid:odroid /etc/emulationstation/es_systems.cfg | tee -a "$LOG_
 
 printf "\nLet's get some wolfenstein 3D in here...\n" | tee -a "$LOG_FILE"
 wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/ecwolf.zip -a "$LOG_FILE"
-sudo wget http://eple.us/retroroller/libretro/aarch64/ecwolf_libretro.so.zip -a "$LOG_FILE"
+wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/ecwolf_libretro.so.zip -a "$LOG_FILE"
 sudo unzip -o ecwolf.zip -d /roms/ | tee -a "$LOG_FILE"
 sudo unzip -n ecwolf_libretro.so.zip -d /home/odroid/.config/retroarch/cores/ | tee -a "$LOG_FILE"
 sudo chmod -v 777 /home/odroid/.config/retroarch/cores/ecwolf_libretro.so | tee -a "$LOG_FILE"
