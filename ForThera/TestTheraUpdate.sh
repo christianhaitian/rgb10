@@ -256,7 +256,7 @@ rm -v -- "$0" | tee -a "$LOG_FILE"
 sudo reboot
 exit 187
 
-elif [ -f "$UPDATE_DONE" ]; then
+elif [ ! -f "$UPDATE_DONE" ]; then
 printf "\nInstalling Atari800 fix...\n" | tee -a "$LOG_FILE"
 sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/Atari800sep.tar -a "$LOG_FILE"
 sudo mv -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
@@ -284,7 +284,7 @@ sudo systemctl restart emulationstation
 exit 187
 
 else 
-msgbox "No more updates available.  Check back later. Last Try"
+msgbox "No more updates available.  Check back later."
 rm -- "$0"
 exit 187
 fi
