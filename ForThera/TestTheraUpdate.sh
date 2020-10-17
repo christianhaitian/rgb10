@@ -15,7 +15,7 @@ if [ -f "$LOG_FILE" ]; then
   sudo rm "$LOG_FILE"
 fi
 
-if [ ! -f "/home/odroid/.config/testupdate10162020" ]
+if [ ! -f "/home/odroid/.config/testupdate10162020" ]; then
 msgbox "This update is fairly large and significant.  It may take 10 to 30 minutes to complete depending on your internet connection.  During this time, you will not see anything on your screen until the update is completed.  If the update does not complete after 30 minutes has passed, you may need to restart this update or restore a backup of your games on to a new image.  Press A to continue."
 
 printf "\nInstalling the base vlc files to allow video snaps to play in emulationstation...\n" | tee -a "$LOG_FILE"
