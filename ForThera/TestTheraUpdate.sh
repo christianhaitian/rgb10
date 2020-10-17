@@ -284,7 +284,7 @@ sudo systemctl restart emulationstation
 exit 187
 
 else 
-msgbox "No more updates available.  Check back later."
+msgbox "No more updates available.  Check back later. Last Try"
 rm -- "$0"
 exit 187
 fi
