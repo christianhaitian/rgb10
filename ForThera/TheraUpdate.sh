@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="10172020-1"
+UPDATE_DATE="10192020"
 LOG_FILE="/home/odroid/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/odroid/.config/testupdate$UPDATE_DATE"
 
@@ -257,13 +257,13 @@ sudo rm -v KernelUpdate.tar.gz | tee -a "$LOG_FILE"
 printf "\nLast but not least, let's ensure that Drastic performance has not been negatively impacted by these updates...\n" | tee -a "$LOG_FILE"
 sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
 
-touch "$UPDATE_DONE"
+touch "/home/odroid/.config/testupdate10162020"
 msgbox "Version 2 updates have been completed.  System will now reboot so the kernel updates can take effect."
 rm -v -- "$0" | tee -a "$LOG_FILE"
 sudo reboot
 exit 187
 
-elif [ ! -f "$UPDATE_DONE" ]; then
+elif [ ! -f "/home/odroid/.config/testupdate10172020-1" ]; then
 printf "\nInstalling Atari800 fix...\n" | tee -a "$LOG_FILE"
 sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/Atari800sep.tar -a "$LOG_FILE"
 sudo mv -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
@@ -285,10 +285,21 @@ sudo rm -v ecwolf_libretro.so.zip | tee -a "$LOG_FILE"
 sudo rm -v ecwolf.zip | tee -a "$LOG_FILE"
 
 msgbox "Atari800 fix update have been applied and as an added bonus, you can now run the Wolfenstein 3D port. Hit A to go back to Emulationstation."
-touch "$UPDATE_DONE"
+touch "/home/odroid/.config/testupdate10172020-1"
 rm -v -- "$0" | tee -a "$LOG_FILE"
 sudo systemctl restart emulationstation
 printf "\033c" >> /dev/tty1
+exit 187
+
+elif [ ! -f "$UPDATE_DONE" ]; then
+printf "\nAllow the ability to quit Emulationstation...\n" | tee -a "$LOG_FILE"
+sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/emulationstation-fcamod/emulationstation.service -O /etc/systemd/system/emulationstation.service -a "$LOG_FILE"
+sudo systemctl daemon-reload
+msgbox "You can now quit EmulationStation.  This could be handy if you want to access a terminal via keyboard by quitting EmulationStation from the start menu then doing alt-f2 or alt-f3 on a connected keyboard for testing or development purposes."
+touch "$UPDATE_DONE"
+rm -v -- "$0" | tee -a "$LOG_FILE"
+printf "\033c" >> /dev/tty1
+sudo systemctl restart emulationstation
 exit 187
 
 else 
