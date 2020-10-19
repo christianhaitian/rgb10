@@ -302,6 +302,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo mv -v /home/odroid/.config/retroarch/config/Flycast/Flycast.cfg /home/odroid/.config/retroarch/config/Flycast/Flycast.cfg.$UPDATE_DATE.bak | tee -a "$LOG_FILE"
 	sudo chown -v odroid:odroid /home/odroid/.config/retroarch/config/Flycast/Flycast.cfg.$UPDATE_DATE.bak | tee -a "$LOG_FILE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
+	touch "$UPDATE_DONE"
 	printf "\033c" >> /dev/tty1
 	exit 187
 fi
