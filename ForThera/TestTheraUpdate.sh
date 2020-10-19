@@ -1,7 +1,6 @@
 #!/bin/bash
 clear
 
-# sudo chvt 2
 UPDATE_DATE="10172020"
 LOG_FILE="/home/odroid/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/odroid/.config/testupdate$UPDATE_DATE"
@@ -9,7 +8,6 @@ UPDATE_DONE="/home/odroid/.config/testupdate$UPDATE_DATE"
 if [ -f "$UPDATE_DONE" ]; then
   msgbox "No more updates available.  Check back later."
   rm -- "$0"
-  sudo chvt 1
   exit 187
 fi
 
@@ -52,7 +50,6 @@ if [ $? -eq 0 ]; then
 else
   printf "Can't download necessary github file.  Check your internet connection and try again." | tee -a "$LOG_FILE"
   rm -- "$0"
-  sudo chvt 1
   exit 1
 fi
 
@@ -64,7 +61,6 @@ if [ $? -eq 0 ]; then
 else
   printf "Can't download necessary github file.  Check your internet connection and try again." | tee -a "$LOG_FILE"
   rm -- "$0"
-  sudo chvt 1
   exit 1
 fi
 
@@ -290,12 +286,10 @@ msgbox "Atari800 fix update have been applied and as an added bonus, you can now
 touch "$UPDATE_DONE"
 rm -v -- "$0" | tee -a "$LOG_FILE"
 sudo systemctl restart emulationstation
-sudo chvt 1
 exit 187
 
 else 
 msgbox "No more updates available.  Check back later."
 rm -- "$0"
-sudo chvt 1
 exit 187
 fi
