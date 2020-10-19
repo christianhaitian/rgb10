@@ -50,7 +50,7 @@ if [ $? -eq 0 ]; then
 else
   printf "Can't download necessary github file.  Check your internet connection and try again." | tee -a "$LOG_FILE"
   rm -- "$0"
-  tput clear >> /dev/tty1
+  printf "\033c" >> /dev/tty1
   exit 1
 fi
 
@@ -62,7 +62,7 @@ if [ $? -eq 0 ]; then
 else
   printf "Can't download necessary github file.  Check your internet connection and try again." | tee -a "$LOG_FILE"
   rm -- "$0"
-  tput clear >> /dev/tty1
+  printf "\033c" >> /dev/tty1
   exit 1
 fi
 
@@ -294,6 +294,6 @@ exit 187
 else 
 msgbox "No more updates available.  Check back later."
 rm -- "$0"
-tput clear >> /dev/tty1
+printf "\033c" >> /dev/tty1
 exit 187
 fi
