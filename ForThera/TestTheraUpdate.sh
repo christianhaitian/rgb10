@@ -1,6 +1,7 @@
 #!/bin/bash
 clear
 
+sudo chvt 2
 UPDATE_DATE="10172020"
 LOG_FILE="/home/odroid/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/odroid/.config/testupdate$UPDATE_DATE"
@@ -8,12 +9,16 @@ UPDATE_DONE="/home/odroid/.config/testupdate$UPDATE_DATE"
 if [ -f "$UPDATE_DONE" ]; then
   msgbox "No more updates available.  Check back later."
   rm -- "$0"
+  sudo chvt 1
   exit 187
 fi
 
 if [ -f "$LOG_FILE" ]; then
   sudo rm "$LOG_FILE"
 fi
+
+touch $LOG_FILE
+tail -f $LOG_FILE >> /dev/tty2 &
 
 if [ ! -f "/home/odroid/.config/testupdate10162020" ]; then
 msgbox "This update is fairly large and significant.  It may take 10 to 30 minutes to complete depending on your internet connection.  During this time, you will not see anything on your screen until the update is completed.  If the update does not complete after 30 minutes has passed, you may need to restart this update or restore a backup of your games on to a new image.  Press A to continue."
@@ -45,6 +50,7 @@ if [ $? -eq 0 ]; then
 else
   printf "Can't download necessary github file.  Check your internet connection and try again." | tee -a "$LOG_FILE"
   rm -- "$0"
+  sudo chvt 1
   exit 1
 fi
 
@@ -56,6 +62,7 @@ if [ $? -eq 0 ]; then
 else
   printf "Can't download necessary github file.  Check your internet connection and try again." | tee -a "$LOG_FILE"
   rm -- "$0"
+  sudo chvt 1
   exit 1
 fi
 
@@ -165,7 +172,7 @@ sudo rm -v es-theme-gbz35-mod.zip | tee -a "$LOG_FILE"
 sudo rm -v dosirakF.zip | tee -a "$LOG_FILE"
 sudo rm -v es-theme-minimal.zip | tee -a "$LOG_FILE"
 sudo chown -v odroid:odroid ~/.asoundrc | tee -a "$LOG_FILE"
-sudo chown -v odroid:odroid -R /etc/emulationstation/
+sudo chown -v odroid:odroid -R /etc/emulationstation/ >> /dev/tty2
 #sudo systemctl start emulationstation
 
 LOGODIR="/boot/BMPs/"
@@ -281,10 +288,12 @@ msgbox "Atari800 fix update have been applied and as an added bonus, you can now
 touch "$UPDATE_DONE"
 rm -v -- "$0" | tee -a "$LOG_FILE"
 sudo systemctl restart emulationstation
+sudo chvt 1
 exit 187
 
 else 
 msgbox "No more updates available.  Check back later."
 rm -- "$0"
+sudo chvt 1
 exit 187
 fi
