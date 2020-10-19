@@ -15,8 +15,13 @@ if [ -f "$LOG_FILE" ]; then
   sudo rm "$LOG_FILE"
 fi
 
+sudo chmod 666 /dev/tty1
+echo 255 > /sys/devices/platform/backlight/backlight/backlight/brightness
+touch $LOG_FILE
+tail -f $LOG_FILE >> /dev/tty1 &
+
 if [ ! -f "/home/odroid/.config/imageshift.sh" ]; then
-msgbox "This update is fairly large and significant.  It may take 10 to 30 minutes to complete depending on your internet connection.  During this time, you will not see anything on your screen until the update is completed.  If the update does not complete after 30 minutes has passed, you may need to restart this update or restore a backup of your games on to a new image.  Press A to continue."
+msgbox "This update is fairly large and significant.  It may take 10 to 30 minutes to complete depending on your internet connection.  If the update does not complete after 30 minutes has passed and there's no update activity still going on the screen, you may need to restart this update or restore a backup of your games on to a new image.  Press A to continue."
 
 printf "\nInstalling the base vlc files to allow video snaps to play in emulationstation...\n" | tee -a "$LOG_FILE"
 sudo apt update -y | tee -a "$LOG_FILE"

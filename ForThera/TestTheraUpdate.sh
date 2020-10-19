@@ -18,6 +18,7 @@ if [ -f "$LOG_FILE" ]; then
 fi
 
 sudo chmod 666 /dev/tty1
+echo 255 > /sys/devices/platform/backlight/backlight/backlight/brightness
 touch $LOG_FILE
 tail -f $LOG_FILE >> /dev/tty1 &
 
