@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="10172020"
+UPDATE_DATE="10172020-1"
 LOG_FILE="/home/odroid/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/odroid/.config/testupdate$UPDATE_DATE"
 
@@ -20,7 +20,7 @@ echo 255 > /sys/devices/platform/backlight/backlight/backlight/brightness
 touch $LOG_FILE
 tail -f $LOG_FILE >> /dev/tty1 &
 
-if [ ! -f "/home/odroid/.config/testupdate10162020" ]; then
+if [ ! -f "/home/odroid/.config/imageshift.sh" ]; then
 msgbox "This update is fairly large and significant.  It may take 10 to 30 minutes to complete depending on your internet connection.  During this time, you will not see anything on your screen until the update is completed.  If the update does not complete after 30 minutes has passed, you may need to restart this update or restore a backup of your games on to a new image.  Press A to continue."
 
 printf "\nInstalling the base vlc files to allow video snaps to play in emulationstation...\n" | tee -a "$LOG_FILE"
