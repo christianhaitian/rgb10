@@ -257,6 +257,7 @@ if [ ! -f "/home/odroid/.config/imageshift.sh" ]; then
 	printf "\nLast but not least, let's ensure that Drastic performance has not been negatively impacted by these updates...\n" | tee -a "$LOG_FILE"
 	sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
 
+	touch "/home/odroid/.config/testupdate10162020"
 	msgbox "Version 2 updates have been completed.  This system will need to reboot at the end of this upgrade process so the kernel updates can take effect."
 fi
 
