@@ -259,6 +259,7 @@ sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-lin
 
 msgbox "Version 2 updates have been completed.  This system will need to reboot at the end of this upgrade process so the kernel updates can take effect."
 rm -v -- "$0" | tee -a "$LOG_FILE"
+fi
 
 if [ ! -f "/home/odroid/.config/testupdate10172020-1" ]; then
 printf "\nInstalling Atari800 fix...\n" | tee -a "$LOG_FILE"
@@ -285,6 +286,7 @@ msgbox "Atari800 fix update have been applied and as an added bonus, you can now
 touch "/home/odroid/.config/testupdate10172020-1"
 rm -v -- "$0" | tee -a "$LOG_FILE"
 printf "\033c" >> /dev/tty1
+fi
 
 if [ ! -f "$UPDATE_DONE" ]; then
 printf "\nAllow the ability to quit Emulationstation...\n" | tee -a "$LOG_FILE"
@@ -295,6 +297,7 @@ touch "$UPDATE_DONE"
 rm -v -- "$0" | tee -a "$LOG_FILE"
 printf "\033c" >> /dev/tty1
 sudo systemctl restart emulationstation
+fi
 
 else 
 msgbox "No more updates available.  Check back later."
