@@ -257,12 +257,10 @@ sudo rm -v KernelUpdate.tar.gz | tee -a "$LOG_FILE"
 printf "\nLast but not least, let's ensure that Drastic performance has not been negatively impacted by these updates...\n" | tee -a "$LOG_FILE"
 sudo ln -sfv /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0.10.0 /usr/lib/arm-linux-gnueabihf/libSDL2-2.0.so.0 | tee -a "$LOG_FILE"
 
-msgbox "Version 2 updates have been completed.  System will now reboot so the kernel updates can take effect."
+msgbox "Version 2 updates have been completed.  This system will need to reboot at the end of this upgrade process so the kernel updates can take effect."
 rm -v -- "$0" | tee -a "$LOG_FILE"
-sudo reboot
-exit 187
 
-elif [ ! -f "/home/odroid/.config/testupdate10172020-1" ]; then
+if [ ! -f "/home/odroid/.config/testupdate10172020-1" ]; then
 printf "\nInstalling Atari800 fix...\n" | tee -a "$LOG_FILE"
 sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/Atari800sep.tar -a "$LOG_FILE"
 sudo mv -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
@@ -283,14 +281,12 @@ sudo chown -v odroid:odroid /home/odroid/.config/retroarch/cores/ecwolf_libretro
 sudo rm -v ecwolf_libretro.so.zip | tee -a "$LOG_FILE"
 sudo rm -v ecwolf.zip | tee -a "$LOG_FILE"
 
-msgbox "Atari800 fix update have been applied and as an added bonus, you can now run the Wolfenstein 3D port. Hit A to go back to Emulationstation."
+msgbox "Atari800 fix update have been applied and as an added bonus, you can now run the Wolfenstein 3D port. Hit A continue."
 touch "/home/odroid/.config/testupdate10172020-1"
 rm -v -- "$0" | tee -a "$LOG_FILE"
 printf "\033c" >> /dev/tty1
-sudo systemctl restart emulationstation
-exit 187
 
-elif [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "$UPDATE_DONE" ]; then
 printf "\nAllow the ability to quit Emulationstation...\n" | tee -a "$LOG_FILE"
 sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/emulationstation-fcamod/emulationstation.service -O /etc/systemd/system/emulationstation.service -a "$LOG_FILE"
 sudo systemctl daemon-reload
@@ -299,7 +295,6 @@ touch "$UPDATE_DONE"
 rm -v -- "$0" | tee -a "$LOG_FILE"
 printf "\033c" >> /dev/tty1
 sudo systemctl restart emulationstation
-exit 187
 
 else 
 msgbox "No more updates available.  Check back later."
