@@ -294,6 +294,7 @@ elif [ ! -f "$UPDATE_DONE" ]; then
 printf "\nAllow the ability to quit Emulationstation...\n" | tee -a "$LOG_FILE"
 sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/emulationstation-fcamod/emulationstation.service -O /etc/systemd/system/emulationstation.service -a "$LOG_FILE"
 sudo systemctl daemon-reload
+msgbox "You can now quit EmulationStation.  This could be handy if you want to access a terminal via keyboard by doing alt-f2 or alt-f3 for testing or debugging purposes."
 touch "$UPDATE_DONE"
 rm -v -- "$0" | tee -a "$LOG_FILE"
 printf "\033c" >> /dev/tty1
