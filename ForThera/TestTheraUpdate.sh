@@ -287,7 +287,7 @@ sudo rm -v ecwolf.zip | tee -a "$LOG_FILE"
 msgbox "Atari800 fix update have been applied and as an added bonus, you can now run the Wolfenstein 3D port. Hit A to go back to Emulationstation."
 touch "$UPDATE_DONE"
 rm -v -- "$0" | tee -a "$LOG_FILE"
-tput reset >> /dev/tty1
+printf "\033c" >> /dev/tty1
 sudo systemctl restart emulationstation
 exit 187
 
