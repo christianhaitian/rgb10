@@ -296,6 +296,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
 	sudo systemctl restart emulationstation
+	exit 187
 fi
 
 else 
