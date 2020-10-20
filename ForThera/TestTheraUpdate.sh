@@ -321,4 +321,5 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	msgbox "You now have the option to select retroarch for playing PSP games.  Restart EmulationStation in order enable this new feature."
 	touch "$UPDATE_DONE"
 	printf "\033c" >> /dev/tty1
+	exit 187
 fi
