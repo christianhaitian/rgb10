@@ -300,7 +300,6 @@ if [ ! -f "/home/odroid/.config/testupdate10192020-1" ]; then
 	printf "\nFix flycast 64bit default configuration save issue\n" | tee -a "$LOG_FILE"
 	sudo mv -v /home/odroid/.config/retroarch/config/Flycast/Flycast.cfg /home/odroid/.config/retroarch/config/Flycast/Flycast.cfg.$UPDATE_DATE.bak | tee -a "$LOG_FILE"
 	sudo chown -v odroid:odroid /home/odroid/.config/retroarch/config/Flycast/Flycast.cfg.$UPDATE_DATE.bak | tee -a "$LOG_FILE"
-	rm -v -- "$0" | tee -a "$LOG_FILE"
 	msgbox "An issue with flycast 64bit being able to save to the default configuration file has been fixed."
 	touch "/home/odroid/.config/testupdate10192020-1"
 	printf "\033c" >> /dev/tty1
@@ -320,6 +319,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo chown -v odroid:odroid /etc/emulationstation/es_systems.cfg | tee -a "$LOG_FILE"
 	msgbox "You now have the option to select retroarch for playing PSP games.  Restart EmulationStation in order enable this new feature."
 	touch "$UPDATE_DONE"
+	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
 	exit 187
 fi
