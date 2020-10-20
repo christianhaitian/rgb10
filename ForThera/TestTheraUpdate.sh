@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="10192020-2"
+UPDATE_DATE="10202020"
 LOG_FILE="/home/odroid/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/odroid/.config/testupdate$UPDATE_DATE"
 
@@ -316,7 +316,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/ppsspp-options/ppsspp.sh -O /usr/local/bin/ppsspp.sh -a "$LOG_FILE"
 	sudo chmod -v 777 /usr/local/bin/ppsspp.sh | tee -a "$LOG_FILE"
 	sudo mv -v /etc/emulationstation/es_systems.cfg /etc/emulationstation/es_systems.cfg.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/ppsspp-options/es_systems.cfg -O /ect/emulationstation/es_systems.cfg -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/ppsspp-options/es_systems.cfg -O /etc/emulationstation/es_systems.cfg -a "$LOG_FILE"
 	sudo chown -v odroid:odroid /etc/emulationstation/es_systems.cfg | tee -a "$LOG_FILE"
 	msgbox "You now have the option to select retroarch for playing PSP games.  Restart EmulationStation in order enable this new feature."
 	touch "$UPDATE_DONE"
