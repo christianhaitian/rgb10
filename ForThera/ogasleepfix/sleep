@@ -1,0 +1,17 @@
+#!/bin/bash
+
+case $1 in
+   pre)
+	# workaround until dwc2 is fixed
+	modprobe -r dwc2
+	/usr/sbin/alsactl store -f /var/local/asound.state
+	rmmod esp8089
+	;;
+   post)
+	/usr/sbin/alsactl restore -f /var/local/asound.state
+	modprobe -r dwc2
+	modprobe -i dwc2
+	modprobe -i esp8089
+	;;
+esac
+
