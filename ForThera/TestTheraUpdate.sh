@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="10212020"
+UPDATE_DATE="10222020"
 LOG_FILE="/home/odroid/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/odroid/.config/testupdate$UPDATE_DATE"
 
@@ -322,7 +322,7 @@ if [ ! -f "/home/odroid/.config/testupdate10202020" ]; then
 	printf "\033c" >> /dev/tty1
 fi
 
-if [ ! -f "$UPDATE_DONE" ]; then
+if [ ! -f "/home/odroid/.config/testupdate10212020" ]; then
 	printf "\nAdd option to use Mednafen_PCE or Mednafen_supergrafx retroarch core for increased accuracy and compatibility\n" | tee -a "$LOG_FILE"
 	sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/mednafen_pce/mednafen_pce_libretro.so -O /home/odroid/.config/retroarch/cores/mednafen_pce_libretro.so -a "$LOG_FILE"
 	sudo chmod -v 777 /home/odroid/.config/retroarch/cores/mednafen_pce_libretro.so | tee -a "$LOG_FILE"
@@ -331,6 +331,15 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/mednafen_pce/es_systems.cfg -O /etc/emulationstation/es_systems.cfg -a "$LOG_FILE"
 	sudo chown -v odroid:odroid /etc/emulationstation/es_systems.cfg | tee -a "$LOG_FILE"
 	msgbox "You now have the option to select Mednafen_PCE retroarch core for PCE/TG-16 games.  Restart EmulationStation in order enable this new feature."
+	touch "/home/odroid/.config/testupdate10212020"
+	printf "\033c" >> /dev/tty1
+fi
+
+if [ ! -f "$UPDATE_DONE" ]; then
+	printf "\nFix wifi sleep issue for OGA 1.1\n" | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/ogasleepfix/sleep -O /usr/lib/systemd/system-sleep/sleep -a "$LOG_FILE"
+	sudo chmod 775 /usr/lib/systemd/system-sleep/sleep | tee -a "$LOG_FILE"
+	msgbox "Wifi sleep fix has been applied for OGA 1.1 units."
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
