@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="10222020"
+UPDATE_DATE="10252020"
 LOG_FILE="/home/odroid/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/odroid/.config/testupdate$UPDATE_DATE"
 
@@ -15,6 +15,7 @@ if [ -f "$LOG_FILE" ]; then
 	sudo rm "$LOG_FILE"
 fi
 
+c_brightness="$(cat /sys/devices/platform/backlight/backlight/backlight/brightness)"
 sudo chmod 666 /dev/tty1
 echo 255 > /sys/devices/platform/backlight/backlight/backlight/brightness
 touch $LOG_FILE
@@ -336,12 +337,14 @@ if [ ! -f "/home/odroid/.config/testupdate10212020" ]; then
 fi
 
 if [ ! -f "$UPDATE_DONE" ]; then
-	printf "\nFix wifi sleep issue for OGA 1.1\n" | tee -a "$LOG_FILE"
-	sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/ogasleepfix/sleep -O /usr/lib/systemd/system-sleep/sleep -a "$LOG_FILE"
-	sudo chmod 775 /usr/lib/systemd/system-sleep/sleep | tee -a "$LOG_FILE"
-	msgbox "Wifi sleep fix has been applied for OGA 1.1 units."
+	printf "\nAdd updated Emulationstation with power icon\n" | tee -a "$LOG_FILE"
+	sudo mv -v /usr/bin/emulationstation/emulationstation /usr/bin/emulationstation/emulationstation.update$UPDATE_DATE.bak | tee -a "$LOG_FILE"
+	sudo wget https://github.com/christianhaitian/rgb10/raw/master/ForThera/emulationstation-fcamod/emulationstation -O /usr/bin/emulationstation/emulationstation -a "$LOG_FILE"
+	sudo chmod -v 777 /usr/bin/emulationstation/emulationstation | tee -a "$LOG_FILE"
+	msgbox "Updated Emulationstation with power icon added when plugged to charger.  You'll need to restart Emulationstation in order for this update to take effect."
 	touch "$UPDATE_DONE"
 	rm -v -- "$0" | tee -a "$LOG_FILE"
 	printf "\033c" >> /dev/tty1
+	echo $c_brightness > /sys/devices/platform/backlight/backlight/backlight/brightness
 	exit 187
 fi
