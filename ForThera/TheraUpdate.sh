@@ -374,7 +374,7 @@ if [ ! -f "$UPDATE_DONE" ]; then
 	sudo chown -v odroid:odroid /home/odroid/.config/retroarch/cores/o2em_libretro.so | tee -a "$LOG_FILE"
 	sudo mkdir -v /roms/odyssey2 | tee -a "$LOG_FILE"
 	sudo sed -i '/wonderswancolor<\/theme>/r addo2em.txt' /etc/emulationstation/es_systems.cfg
-	sudo sed -i '/Joy Mapping Pause/c\Joy Mapping Pause \= \"J0B10\/B1\"' /home/odroid/.config/mupen64plus/mupen64plus.cfg
+	sudo sed -i '/Joy Mapping Pause/c\Joy Mapping Pause \= \"J0B13\/B1\"' /home/odroid/.config/mupen64plus/mupen64plus.cfg
 	sudo chown -v odroid:odroid /etc/emulationstation/es_systems.cfg | tee -a "$LOG_FILE"
 	sudo chown -v odroid:odroid /home/odroid/.config/mupen64plus/mupen64plus.cfg | tee -a "$LOG_FILE"
 	sudo rm -v o2em_libretro.so.zip | tee -a "$LOG_FILE" | tee -a "$LOG_FILE"
