@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-UPDATE_DATE="10292020"
+UPDATE_DATE="10292020-1"
 LOG_FILE="/home/odroid/update$UPDATE_DATE.log"
 UPDATE_DONE="/home/odroid/.config/testupdate$UPDATE_DATE"
 
